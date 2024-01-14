@@ -126,6 +126,9 @@
 //     .catch(err => console.log('ERROR', err));
 
 
+
+
+
 /** 
  * DECK OF CARDS API QUESTIONS
  */
@@ -135,23 +138,19 @@
 //     }
     // shuffleCards()
 
-let url = 'https://deckofcardsapi.com/api/deck/new/draw/'
+// let url = 'https://deckofcardsapi.com/api/deck/new/draw/'
 
 /**
  * 1
  */
-axios.get(url)
-    .then(res => {
-        let value = console.log(res.data.cards[0].value);
-        let suit = console.log(res.data.cards[0].suit);
+// axios.get(url)
+//     .then(res => {
+//         let value = console.log(res.data.cards[0].value);
+//         let suit = console.log(res.data.cards[0].suit);
 
-        console.log(`${value} ${suit}`);
-    })
-    .catch(err => console.log('Error:', err));
-
-
-
-
+//         console.log(`${value} ${suit}`);
+//     })
+//     .catch(err => console.log('Error:', err));
 
 
 /**
@@ -160,6 +159,15 @@ axios.get(url)
 
 
 
+// axios.get(url)
+//     .then(res => {
+//         let value = res.data.cards[0].value;
+//         let suit = res.data.cards[0].suit;
+
+//         console.log(res.data.cards[0].image);
+//     })
+//     .catch(err => console.log('Error:', err));
+
 
 
 
@@ -167,3 +175,38 @@ axios.get(url)
 /**
  * 3
  */
+
+document.addEventListener("DOMContentLoaded", function(){
+    axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+        .then(res => {
+            let deckID = res.data.deck_id;
+            console.log(deckID)
+
+
+let button = document.getElementById('drawCardButton')
+let cardIMG = document.getElementById('cardIMG')
+            
+        button.addEventListener('click', function(){
+            
+            
+            
+            axios.get(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
+                .then(res => {
+                    console.log(res.data)
+                    console.log(`${res.data.cards[0].value} ${res.data.cards[0].suit}`)
+                    cardIMG.src = res.data.cards[0].image
+                })
+            
+            })
+
+
+
+        })
+
+})
+
+
+
+
+
+
