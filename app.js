@@ -177,6 +177,7 @@
  */
 
 document.addEventListener("DOMContentLoaded", function(){
+    //on DOMContentLoaded, refresh the deck of cards, resets to 52
     axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
         .then(res => {
             let deckID = res.data.deck_id;
@@ -185,15 +186,15 @@ document.addEventListener("DOMContentLoaded", function(){
 
 let button = document.getElementById('drawCardButton')
 let cardIMG = document.getElementById('cardIMG')
+let cardValueAndSuit = document.getElementById('cardValueAndSuit')
             
+        //when the buton is clicked, draw a card.
         button.addEventListener('click', function(){
-            
-            
             
             axios.get(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
                 .then(res => {
                     console.log(res.data)
-                    console.log(`${res.data.cards[0].value} ${res.data.cards[0].suit}`)
+                    cardValueAndSuit.textContent = `${res.data.cards[0].value} OF ${res.data.cards[0].suit}`
                     cardIMG.src = res.data.cards[0].image
                 })
             
