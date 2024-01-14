@@ -50,9 +50,12 @@
 
 
 
+/**
+ * NUMBERS API QUESTIONS
+ */
 
 
-let url = 'http://numbersapi.com/4/'
+// let url = 'http://numbersapi.com/4/'
 
 /**
 * 1
@@ -84,21 +87,83 @@ let url = 'http://numbersapi.com/4/'
 * 3
 **/
 
-axios.get('http://numbersapi.com/4')
-    .then(res => {
-        console.log(res.data)
-        return axios.get('http://numbersapi.com/4')
-    })
-    .then(res => {
-        console.log(res.data)
-        return axios.get('http://numbersapi.com/4')
-    })
-    .then(res => {
-        console.log(res.data)
-        return axios.get('http://numbersapi.com/4')
-    })
-    .then(res => {
-        console.log(res.data)
-    })
+// axios.get('http://numbersapi.com/4')
+//     .then(res => {
+//         console.log(res.data)
+//         return axios.get('http://numbersapi.com/4')
+//     })
+//     .then(res => {
+//         console.log(res.data)
+//         return axios.get('http://numbersapi.com/4')
+//     })
+//     .then(res => {
+//         console.log(res.data)
+//         return axios.get('http://numbersapi.com/4')
+//     })
+//     .then(res => {
+//         console.log(res.data)
+//     })
 
-    .catch(err => console.log('ERROR', err))
+//     Promise.all()
+
+//     .catch(err => console.log('ERROR', err))
+
+//3 revised 
+
+// const requests = [
+//     axios.get('http://numbersapi.com/4'),
+//     axios.get('http://numbersapi.com/4'),
+//     axios.get('http://numbersapi.com/4'),
+//     axios.get('http://numbersapi.com/4')
+// ];
+
+// Promise.all(requests)
+//     .then(responses => {
+//         responses.forEach(res => {
+//             console.log(res.data);
+//         });
+//     })
+//     .catch(err => console.log('ERROR', err));
+
+
+/** 
+ * DECK OF CARDS API QUESTIONS
+ */
+// const shuffleCards = function(){
+//     axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+//         .then(res => console.log(res.data.deck_id))
+//     }
+    // shuffleCards()
+
+let url = 'https://deckofcardsapi.com/api/deck/new/draw/'
+
+/**
+ * 1
+ */
+axios.get(url)
+    .then(res => {
+        let value = console.log(res.data.cards[0].value);
+        let suit = console.log(res.data.cards[0].suit);
+
+        console.log(`${value} ${suit}`);
+    })
+    .catch(err => console.log('Error:', err));
+
+
+
+
+
+
+/**
+ * 2
+ */
+
+
+
+
+
+
+
+/**
+ * 3
+ */
