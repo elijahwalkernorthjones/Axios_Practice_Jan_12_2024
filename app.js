@@ -175,36 +175,46 @@
 /**
  * 3
  */
+document.addEventListener("DOMContentLoaded", async function () {
+    try {
+        // On DOMContentLoaded, refresh the deck of cards, resets to 52
+        const res = await axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1');
+        const deckID = res.data.deck_id;
+        console.log(deckID);
 
-document.addEventListener("DOMContentLoaded", function(){
-    //on DOMContentLoaded, refresh the deck of cards, resets to 52
-    axios.get('https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
-        .then(res => {
-            let deckID = res.data.deck_id;
-            console.log(deckID)
+        const button = document.getElementById('drawCardButton');
+        const cardIMG = document.getElementById('cardIMG');
+        const cardValueAndSuit = document.getElementById('cardValueAndSuit');
+
+        // When the button is clicked, draw a card.
+        button.addEventListener('click', async function () {
+            try {
+                const drawRes = await axios.get(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`);
+                console.log(drawRes.data);
+                cardValueAndSuit.textContent = `${drawRes.data.cards[0].value} OF ${drawRes.data.cards[0].suit}`;
+                cardIMG.src = drawRes.data.cards[0].image;
+            } catch (error) {
+                console.error("Error drawing a card:", error.message);
+            }
+        });
+
+    } catch (error) {
+        console.error("Error initializing the deck:", error.message);
+    }
+});
 
 
-let button = document.getElementById('drawCardButton')
-let cardIMG = document.getElementById('cardIMG')
-let cardValueAndSuit = document.getElementById('cardValueAndSuit')
+
+
+
             
         //when the buton is clicked, draw a card.
-        button.addEventListener('click', function(){
-            
-            axios.get(`https://deckofcardsapi.com/api/deck/${deckID}/draw/?count=1`)
-                .then(res => {
-                    console.log(res.data)
-                    cardValueAndSuit.textContent = `${res.data.cards[0].value} OF ${res.data.cards[0].suit}`
-                    cardIMG.src = res.data.cards[0].image
-                })
-            
-            })
+        
+        
 
 
 
-        })
 
-})
 
 
 
